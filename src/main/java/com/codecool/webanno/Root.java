@@ -6,15 +6,23 @@ import com.sun.net.httpserver.HttpHandler;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.Set;
+import org.reflections.Reflections;
+import java.util.stream.Collectors;
 
-public class RootController implements HttpHandler {
+public class Root implements HttpHandler {
     private WebController webController;
 
-    public RootController(WebController webController) {
+    public Root(WebController webController) {
         this.webController = webController;
     }
 
+
+
     public void handle(HttpExchange httpExchange) {
+
+
         String path = httpExchange.getRequestURI().getPath();
         String firstSegment = getFirstSegmentOfURI(path);
 
@@ -33,8 +41,8 @@ public class RootController implements HttpHandler {
                         e.printStackTrace();
                     }
                 }
+                }
             }
-        }
     }
 
     private String getFirstSegmentOfURI(String path) {
